@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruby Advisory — Operations Consulting & AI Implementation</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Courier New', Courier, monospace;
+    background: #ffffff;
+    color: #000;
+    overflow-x: hidden;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #f0f0f0;
+    transform: translateY(-100px);
+    opacity: 0;
+    animation: navFall 1s ease-out 2s forwards;
+  }
+
+  @keyframes navFall {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #b01030;
+    letter-spacing: 1px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: #000;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: #b01030;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #b01030;
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+  }
+
+  .ruby-container {
+    width: 100%;
+    max-width: 600px;
+    height: 60vh;
+    position: relative;
+  }
+
+  .ruby-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .tagline {
+    text-align: center;
+    padding: 2rem;
+    max-width: 700px;
+    animation: fadeIn 1s ease-in 2.5s forwards;
+    opacity: 0;
+  }
+
+  .tagline h1 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.8;
+    color: #000;
+    letter-spacing: 0.5px;
+  }
+
+  .tagline .highlight {
+    color: #b01030;
+    font-weight: 600;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* Content Sections */
+  section {
+    min-height: 80vh;
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #b01030;
+    font-weight: 600;
+  }
+
+  section p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  /* About */
+  #about {
+    animation: slideInLeft 1s ease-out 3s forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Services */
+  #services {
+    background: #fafafa;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .service-card {
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+  }
+
+  .service-card:hover {
+    border-color: #b01030;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(176, 16, 48, 0.1);
+  }
+
+  .service-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #b01030;
+  }
+
+  .service-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  /* Work / Case Studies */
+  #work {
+    background: #fff;
+  }
+
+  .case-studies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .case-study {
+    padding: 2.5rem;
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+  }
+
+  .case-study:hover {
+    border-color: #b01030;
+    background: #fafafa;
+  }
+
+  .case-study h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #b01030;
+  }
+
+  .case-study .client-type {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .case-study p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  /* Free Audit CTA */
+  #audit {
+    background: #b01030;
+    color: #fff;
+    text-align: center;
+    padding: 5rem 3rem;
+  }
+
+  #audit h2 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  #audit p {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: #fff;
+    color: #b01030;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #fff;
+  }
+
+  .cta-button:hover {
+    background: transparent;
+    color: #fff;
+    border-color: #fff;
+  }
+
+  /* Contact */
+  #contact {
+    text-align: center;
+  }
+
+  #contact a {
+    color: #b01030;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 2px solid #b01030;
+    padding-bottom: 4px;
+    transition: all 0.3s ease;
+  }
+
+  #contact a:hover {
+    border-color: transparent;
+  }
+
+  /* Footer */
+  footer {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    nav {
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .ruby-container {
+      height: 40vh;
+    }
+
+    .tagline h1 {
+      font-size: 1rem;
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+    }
+
+    section h2 {
+      font-size: 2rem;
+    }
+
+    .services-grid,
+    .case-studies {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">RUBY ADVISORY</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#audit">Free Audit</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="ruby-container">
+    <iframe src="ruby-ascii.html"></iframe>
+  </div>
+  <div class="tagline">
+    <h1>Operations consulting and AI implementation that makes your company <span class="highlight">better, faster, stronger.</span></h1>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <h2>Who We Are</h2>
+  <p>
+    Ruby Advisory builds custom AI solutions and implements proven automation systems for companies ready to operate at the next level.
+  </p>
+  <p>
+    We're not consultants who hand you a report and leave. We're builders, operators, and partners. We implement. We automate. We make you unstoppable.
+  </p>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <h2>What We Do</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Operations Consulting</h3>
+      <p>We analyze your workflows, identify bottlenecks, and design systems that scale. Not theory — actual implementation.</p>
+    </div>
+    <div class="service-card">
+      <h3>AI Implementation</h3>
+      <p>Custom AI solutions tailored to your business. From automation to intelligent assistants, we build what you need.</p>
+    </div>
+    <div class="service-card">
+      <h3>Process Automation</h3>
+      <p>Eliminate repetitive tasks. We build systems that run themselves so your team can focus on what matters.</p>
+    </div>
+    <div class="service-card">
+      <h3>Custom Solutions</h3>
+      <p>No two businesses are the same. We build exactly what you need — not off-the-shelf software that almost fits.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Work / Case Studies -->
+<section id="work">
+  <h2>Our Work</h2>
+  <div class="case-studies">
+    <div class="case-study">
+      <div class="client-type">Health & Wellness</div>
+      <h3>Real Truth About Health</h3>
+      <p>
+        Implemented AI-driven content automation and audience engagement systems that increased reach and reduced manual work by 70%.
+      </p>
+    </div>
+    <div class="case-study">
+      <div class="client-type">Wellness Center</div>
+      <h3>East to West Wellness Center</h3>
+      <p>
+        Built custom scheduling and patient management automation, streamlining operations and improving patient experience.
+      </p>
+    </div>
+    <div class="case-study">
+      <div class="client-type">Fitness Coaching</div>
+      <h3>Coach Gabriel Fitness</h3>
+      <p>
+        Designed and deployed intelligent client tracking and personalized workout automation, scaling coaching capacity 3x.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Free Audit CTA -->
+<section id="audit">
+  <h2>Get a Free Operations Audit</h2>
+  <p>
+    Let us analyze your workflows and show you exactly where AI and automation can make you faster, leaner, and more profitable.
+  </p>
+  <a href="mailto:hello@rubyadvisory.com" class="cta-button">Request Your Audit</a>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h2>Let's Talk</h2>
+  <p>Ready to build something great?</p>
+  <p><a href="mailto:hello@rubyadvisory.com">hello@rubyadvisory.com</a></p>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 Ruby Advisory. Building better, faster, stronger.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ruby Gemstone - ASCII</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { AsciiEffect } from 'three/addons/effects/AsciiEffect.js';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xffffff);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.5, 6.7);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+const effect = new AsciiEffect(renderer, ' .:-=+*#%@', { invert: true, resolution: 0.2 });
+effect.setSize(window.innerWidth, window.innerHeight);
+effect.domElement.style.color = '#b01030';
+effect.domElement.style.backgroundColor = '#fff';
+document.body.appendChild(effect.domElement);
+
+function createGemstone() {
+  const geo = new THREE.BufferGeometry();
+  const tableRadius = 0.6;
+  const crownRadius = 1.0;
+  const girdleRadius = 1.1;
+  const tableY = 0.5;
+  const crownY = 0.25;
+  const girdleY = 0.0;
+  const pavilionY = -1.2;
+  const sides = 8;
+
+  const allVerts = [];
+
+  allVerts.push(new THREE.Vector3(0, tableY, 0));
+
+  for (let i = 0; i < sides; i++) {
+    const a = (i / sides) * Math.PI * 2;
+    allVerts.push(new THREE.Vector3(Math.cos(a) * tableRadius, tableY, Math.sin(a) * tableRadius));
+  }
+  for (let i = 0; i < sides; i++) {
+    const a = (i / sides) * Math.PI * 2;
+    allVerts.push(new THREE.Vector3(Math.cos(a) * crownRadius, crownY, Math.sin(a) * crownRadius));
+  }
+  for (let i = 0; i < sides; i++) {
+    const a = (i / sides) * Math.PI * 2;
+    allVerts.push(new THREE.Vector3(Math.cos(a) * girdleRadius, girdleY, Math.sin(a) * girdleRadius));
+  }
+  allVerts.push(new THREE.Vector3(0, pavilionY, 0));
+
+  const positions = new Float32Array(allVerts.length * 3);
+  allVerts.forEach((v, i) => {
+    positions[i * 3] = v.x;
+    positions[i * 3 + 1] = v.y;
+    positions[i * 3 + 2] = v.z;
+  });
+
+  const idx = [];
+  for (let i = 0; i < sides; i++) {
+    const next = (i + 1) % sides;
+    idx.push(0, 1 + i, 1 + next);
+    idx.push(1 + i, 9 + i, 1 + next);
+    idx.push(1 + next, 9 + i, 9 + next);
+    idx.push(9 + i, 17 + i, 9 + next);
+    idx.push(9 + next, 17 + i, 17 + next);
+    idx.push(17 + i, 25, 17 + next);
+  }
+
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setIndex(idx);
+  geo.computeVertexNormals();
+  return geo;
+}
+
+const gemGeo = createGemstone();
+const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, flatShading: true });
+const mesh = new THREE.Mesh(gemGeo, mat);
+
+const light1 = new THREE.DirectionalLight(0xffffff, 2);
+light1.position.set(1, 2, 3);
+scene.add(light1);
+
+const light2 = new THREE.DirectionalLight(0xffffff, 1);
+light2.position.set(-2, -1, 1);
+scene.add(light2);
+
+const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+scene.add(ambient);
+
+const group = new THREE.Group();
+group.add(mesh);
+scene.add(group);
+
+let startTime = Date.now();
+const fallDuration = 2000;
+const startY = 4;
+const endY = 0.3;
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  const elapsed = Date.now() - startTime;
+
+  if (elapsed < fallDuration) {
+    const t = elapsed / fallDuration;
+    const eased = 1 - Math.pow(1 - t, 3);
+    group.position.y = startY + (endY - startY) * eased;
+  } else {
+    group.position.y = endY;
+  }
+
+  if (elapsed > fallDuration) {
+    const spinElapsed = elapsed - fallDuration;
+    group.rotation.y = spinElapsed * 0.0015;
+  }
+
+  effect.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  effect.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
