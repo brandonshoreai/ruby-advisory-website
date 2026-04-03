@@ -38,7 +38,7 @@ camera.lookAt(0, 0, 0);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const effect = new AsciiEffect(renderer, ' .:-=+*#%@', { invert: true, resolution: 0.2 });
+const effect = new AsciiEffect(renderer, ' .:-=+*#%@', { invert: false, resolution: 0.2 });
 effect.setSize(window.innerWidth, window.innerHeight);
 effect.domElement.style.color = '#b01030';
 effect.domElement.style.backgroundColor = '#fff';
