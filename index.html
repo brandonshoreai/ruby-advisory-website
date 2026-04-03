@@ -29,9 +29,8 @@
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #f0f0f0;
+    background: transparent;
+    backdrop-filter: none;
     transform: translateY(-100px);
     opacity: 0;
     animation: navFall 1s ease-out 2s forwards;
@@ -98,9 +97,10 @@
 
   .ruby-container {
     width: 100%;
-    max-width: 600px;
-    height: 60vh;
-    position: relative;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     background: #ffffff;
   }
 
@@ -116,6 +116,8 @@
     max-width: 700px;
     animation: fadeIn 1s ease-in 2.5s forwards;
     opacity: 0;
+    position: relative;
+    z-index: 10;
   }
 
   .tagline h1 {
@@ -373,9 +375,7 @@
   <div class="ruby-container">
     <iframe src="ruby-ascii.html"></iframe>
   </div>
-  <div class="tagline">
-    <h1>Operations consulting and AI implementation that makes your company <span class="highlight">better, faster, stronger.</span></h1>
-  </div>
+
 </section>
 
 <!-- About -->
