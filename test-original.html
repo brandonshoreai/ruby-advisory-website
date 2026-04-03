@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Ruby Gemstone - ASCII v1 (Clean Background)</title>
+<title>Ruby Gemstone - ASCII v1 (Original Style)</title>
 <style>
   * { margin: 0; padding: 0; }
   body {
@@ -38,14 +38,14 @@ camera.lookAt(0, 0, 0);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-// EXACT same settings as original v1
+// ASCII Effect — original invert:true style (the one you loved)
 const effect = new AsciiEffect(renderer, ' .:-=+*#%@', { invert: true, resolution: 0.2 });
 effect.setSize(window.innerWidth, window.innerHeight);
 effect.domElement.style.color = '#b01030';
 effect.domElement.style.backgroundColor = '#fff';
 document.body.appendChild(effect.domElement);
 
-// EXACT same gemstone geometry
+// Build same gemstone geometry
 function createGemstone() {
   const geo = new THREE.BufferGeometry();
   const tableRadius = 0.6;
@@ -58,6 +58,7 @@ function createGemstone() {
   const sides = 8;
 
   const allVerts = [];
+
   allVerts.push(new THREE.Vector3(0, tableY, 0));
 
   for (let i = 0; i < sides; i++) {
@@ -99,9 +100,12 @@ function createGemstone() {
 }
 
 const gemGeo = createGemstone();
+
+// Solid mesh for ASCII rendering (needs surfaces to shade)
 const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, flatShading: true });
 const mesh = new THREE.Mesh(gemGeo, mat);
 
+// Add lights so ASCII effect has shading to work with
 const light1 = new THREE.DirectionalLight(0xffffff, 2);
 light1.position.set(1, 2, 3);
 scene.add(light1);
@@ -142,14 +146,6 @@ function animate() {
   }
 
   effect.render(scene, camera);
-
-  // Make background @ characters white so they blend into white page
-  // With invert:true + black background, ALL background pixels map to @
-  // The ruby itself uses lighter chars (.:-=+*#%) so @ only appears in background
-  const tds = effect.domElement.querySelectorAll('td');
-  for (let i = 0; i < tds.length; i++) {
-    tds[i].innerHTML = tds[i].innerHTML.replace(/@/g, '<span style="color:#fff">@</span>');
-  }
 }
 
 animate();
