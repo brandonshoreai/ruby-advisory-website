@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ruby Advisory — Operations Consulting & AI Implementation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono&display=swap" rel="stylesheet">
 <style>
   * {
     margin: 0;
@@ -12,11 +16,10 @@
   }
 
   body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Garamond', 'Apple Garamond', 'Baskerville', 'Times New Roman', serif;
     background: #ffffff;
     color: #000;
     overflow-x: hidden;
-    text-transform: uppercase;
   }
 
   /* Navigation */
@@ -35,6 +38,8 @@
     transform: translateY(-100px);
     opacity: 0;
     animation: navFall 1s ease-out 2s forwards;
+    font-family: 'Geist Mono', 'Courier New', monospace;
+    text-transform: uppercase;
   }
 
   @keyframes navFall {
@@ -150,7 +155,8 @@
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: #b01030;
-    font-weight: 600;
+    font-weight: 400;
+    font-family: 'Instrument Serif', Georgia, serif;
   }
 
   section p {
@@ -158,22 +164,93 @@
     line-height: 1.9;
     margin-bottom: 1.5rem;
     color: #333;
+    text-transform: none;
   }
 
-  /* About */
-  #about {
-    animation: slideInLeft 1s ease-out 3s forwards;
-    opacity: 0;
+  /* Value Proposition */
+  #value-prop {
+    background: #fff;
+    padding: 6rem 3rem;
   }
 
-  @keyframes slideInLeft {
-    from {
-      transform: translateX(-50px);
-      opacity: 0;
+  .value-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .value-left h2 {
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #000;
+    font-weight: 400;
+  }
+
+  .value-subtext {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-box {
+    text-align: left;
+    background: #fafafa;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+  }
+
+  .stat-number {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.1rem;
+    color: #000;
+    margin-bottom: 0;
+    font-weight: 600;
+  }
+
+  .stat-label {
+    font-size: 0.95rem;
+    color: #666;
+    text-transform: none;
+  }
+
+  .video-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #f5f5f5;
+    border: 2px dashed #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 968px) {
+    .value-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
     }
-    to {
-      transform: translateX(0);
-      opacity: 1;
+
+    .value-left h2 {
+      font-size: 2.5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -206,6 +283,8 @@
     font-size: 1.3rem;
     margin-bottom: 1rem;
     color: #b01030;
+    font-weight: 400;
+    font-family: 'Instrument Serif', Georgia, serif;
   }
 
   .service-card p {
@@ -240,6 +319,8 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #b01030;
+    font-weight: 400;
+    font-family: 'Instrument Serif', Georgia, serif;
   }
 
   .case-study .client-type {
@@ -267,6 +348,7 @@
     color: #fff;
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
+    font-family: 'Instrument Serif', Georgia, serif;
   }
 
   #audit p {
@@ -282,7 +364,7 @@
     color: #b01030;
     text-decoration: none;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 400;
     transition: all 0.3s ease;
     border: 2px solid #fff;
   }
@@ -302,7 +384,7 @@
     color: #b01030;
     text-decoration: none;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 400;
     border-bottom: 2px solid #b01030;
     padding-bottom: 4px;
     transition: all 0.3s ease;
@@ -379,15 +461,33 @@
 
 </section>
 
-<!-- About -->
-<section id="about">
-  <h2>Who We Are</h2>
-  <p>
-    Ruby Advisory builds custom AI solutions and implements proven automation systems for companies ready to operate at the next level.
-  </p>
-  <p>
-    We're not consultants who hand you a report and leave. We're builders, operators, and partners. We implement. We automate. We make you unstoppable.
-  </p>
+<!-- Value Proposition -->
+<section id="value-prop">
+  <div class="value-content">
+    <div class="value-left">
+      <h2>Operational Excellence.<br>Guaranteed.</h2>
+      <p class="value-subtext">
+        We don't just advise — we build, implement, and deliver results. Custom AI solutions and automation systems that make your company faster, leaner, and unstoppable.
+      </p>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-number">⚡ Lightning Fast Results</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">✓ 32+ Satisfied Clients</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">🚀 4+ Years of Experience</div>
+        </div>
+      </div>
+    </div>
+    <div class="value-right">
+      <div class="video-placeholder">
+        <p>Video goes here</p>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">(Provide video link to embed)</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Services -->
