@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono&display=swap" rel="stylesheet">
 <style>
   * {
@@ -170,32 +171,49 @@
   /* Value Proposition */
   #value-prop {
     background: #fff;
-    padding: 6rem 3rem;
+    padding: 6rem 3rem 6rem 3rem;
   }
 
   .value-content {
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 6rem;
     align-items: center;
   }
 
+  .value-left {
+    padding-right: 2rem;
+    padding-left: 0;
+  }
+
+  .value-left h2,
+  .value-left .value-subtext {
+    margin-left: -110px;
+  }
+
   .value-left h2 {
-    font-size: 5rem;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
+    font-size: 7.1rem;
+    line-height: 0.96;
+    margin-bottom: 1rem;
     color: #000;
     font-weight: 400;
+    max-width: 15ch;
+  }
+
+  .value-left h2 .nowrap {
+    white-space: nowrap;
   }
 
   .value-subtext {
     font-size: 1.3rem;
-    line-height: 1.7;
+    line-height: 1.35;
     color: #666;
     margin-bottom: 3rem;
-    font-weight: 300;
+    font-weight: 400;
+    font-family: 'Instrument Sans', Arial, sans-serif;
+    max-width: 31rem;
   }
 
   .stats-grid {
@@ -229,6 +247,7 @@
   .video-placeholder {
     width: 100%;
     aspect-ratio: 16 / 9;
+    min-height: 380px;
     background: #f5f5f5;
     border: 2px dashed #ccc;
     display: flex;
@@ -246,7 +265,7 @@
     }
 
     .value-left h2 {
-      font-size: 2.5rem;
+      font-size: 4.5rem;
     }
 
     .stats-grid {
@@ -465,21 +484,11 @@
 <section id="value-prop">
   <div class="value-content">
     <div class="value-left">
-      <h2>A weeks worth of work<br>in hours.</h2>
+      <h2><span class="nowrap">A week's worth of</span><br>work in hours.</h2>
       <p class="value-subtext">
-        AI systems that automate your operations — so your team spends less time on process and more time on what matters
+        AI systems that automate your operations so your team spends less time on process and more time on what matters
       </p>
-      <div class="stats-grid">
-        <div class="stat-box">
-          <div class="stat-number">⚡ Lightning Fast Results</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">✓ 32+ Satisfied Clients</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">🚀 4+ Years of Experience</div>
-        </div>
-      </div>
+
     </div>
     <div class="value-right">
       <div class="video-placeholder">
