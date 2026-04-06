@@ -1,4 +1,5 @@
 import LiquidGlass from 'liquid-glass-react'
+import rubyLogo from './assets/ruby-logo.png'
 import './App.css'
 
 function App() {
@@ -238,7 +239,10 @@ function App() {
           padding="8px 16px"
           onClick={() => console.log('Button clicked!')}
         >
-          <span className="henry-button-text">Talk to Henry</span>
+          <span className="henry-button-text">
+            <img src={rubyLogo} alt="" className="henry-button-logo" />
+            Call Ruby
+          </span>
         </LiquidGlass>
       </div>
 

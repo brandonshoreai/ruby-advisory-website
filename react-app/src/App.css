@@ -173,8 +173,8 @@ nav {
 .henry-button {
   position: fixed;
   bottom: 28px;
-  left: calc(100vw - 110px);
-  transform: translateY(215px);
+  left: calc(100vw - 100px);
+  transform: translateY(250px);
   z-index: 9999;
   cursor: pointer;
 }
@@ -182,11 +182,20 @@ nav {
 .henry-button-text {
   color: #b01030;
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 400;
   letter-spacing: 0;
-  display: inline-block;
-  padding: 10px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+.henry-button-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
 }
 
 /* Flat pills — exact match to Paper (215×50, light gray, pill shape) */
