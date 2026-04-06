@@ -174,9 +174,18 @@ nav {
   position: fixed;
   bottom: 28px;
   left: calc(100vw - 100px);
-  transform: translateY(250px);
+  transform: translateY(360px);
+  opacity: 0;
+  animation: henryRise 1s ease-out 2s forwards;
   z-index: 9999;
   cursor: pointer;
+}
+
+@keyframes henryRise {
+  to {
+    transform: translateY(250px);
+    opacity: 1;
+  }
 }
 
 .henry-button-text {
