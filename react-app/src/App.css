@@ -144,13 +144,13 @@ nav {
 
 .value-left h2 {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 7rem;
+  font-size: 5.5rem;
   line-height: 0.95;
-  letter-spacing: -0.04em;
-  margin: 0 0 1rem 45px;
+  letter-spacing: -0.035em;
+  margin: 0 0 1.1rem 0;
   color: #000;
   font-weight: 400;
-  max-width: 11ch;
+  max-width: none;
 }
 
 .value-left h2 .nowrap {
@@ -158,44 +158,75 @@ nav {
 }
 
 .value-subtext {
-  font-size: 1.3rem;
-  line-height: 1.35;
-  color: #666;
-  margin: 0 0 1.75rem 45px;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: #6a6a6a;
+  margin: 0 0 2rem 0;
   font-weight: 400;
   font-family: 'Instrument Sans', Arial, sans-serif;
-  max-width: 35rem;
+  max-width: 32rem;
 }
 
+/* Floating Henry button — fixed bottom-right, stays on scroll.
+   LiquidGlass applies translate(-50%, -50%) internally, so we offset the
+   anchor by ~half the button's width/height to land the visual in the corner. */
+.henry-button {
+  position: fixed;
+  bottom: 28px;
+  left: calc(100vw - 110px);
+  transform: translateY(215px);
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.henry-button-text {
+  color: #b01030;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  display: inline-block;
+  padding: 10px 0;
+}
+
+/* Flat pills — exact match to Paper (215×50, light gray, pill shape) */
 .glass-pills {
   display: flex;
-  gap: 1.25rem;
-  margin: 8px 0 0 95px;
+  gap: 16px;
   align-items: center;
-}
-
-.glass-pill-slot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 280px;
-  min-width: 280px;
-  min-height: 72px;
+  margin-top: 0.75rem;
 }
 
 .glass-pill {
-  width: 280px;
-  max-width: 280px;
-  transform: scaleX(3);
-  transform-origin: center;
+  width: 215px;
+  height: 50px;
+  border-radius: 999px;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.glass-pill > span {
-  display: block;
-  width: 100%;
-  min-height: 34px;
-  transform: scaleX(0.333333);
-  transform-origin: center;
+.glass-pill-num {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5c0815;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.glass-pill-label {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
 }
 .value-right {
   display: flex;
@@ -222,6 +253,487 @@ nav {
   margin-top: 1rem;
 }
 
+/* ─────────────────────────────────────────────
+   EDITORIAL SECTIONS — shared tokens & primitives
+   ───────────────────────────────────────────── */
+
+:root {
+  --ink: #0a0a0a;
+  --ink-soft: #2a2a2a;
+  --ink-muted: #6a6a6a;
+  --ink-quiet: #9a958b;
+  --hairline: #e5e3de;
+  --hairline-bold: #c8c5bd;
+  --paper: #ffffff;
+  --paper-warm: #f7f5f0;
+  --paper-deep: #efece4;
+  --ruby: #b01030;
+  --ruby-deep: #7a0b20;
+  --ruby-ink: #fff5ee;
+}
+
+.section-frame {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 8rem 0 4.5rem;
+}
+
+.section-label {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.78rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-quiet);
+}
+
+.section-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 6.25rem;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+  max-width: 18ch;
+}
+
+.section-title-em {
+  font-style: italic;
+  color: var(--ruby);
+}
+
+.section-lede {
+  font-family: 'Instrument Sans', Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  color: var(--ink-muted);
+  max-width: 38rem;
+  margin-top: 0.75rem;
+}
+
+/* ─────────────────────────────────────────────
+   § PRACTICE
+   ───────────────────────────────────────────── */
+
+.practice {
+  background: var(--paper);
+  border-top: 1px solid var(--hairline);
+}
+
+.practice-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8rem;
+}
+
+.practice-row {
+  display: grid;
+  grid-template-columns: 90px minmax(260px, 1.05fr) minmax(0, 1.75fr);
+  gap: 3rem;
+  align-items: start;
+  padding: 4rem 0 4rem;
+  border-top: 1px solid var(--hairline);
+  position: relative;
+  transition: background 280ms ease;
+}
+
+.practice-row::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--ruby);
+  transition: width 520ms cubic-bezier(.16,.84,.2,1);
+}
+
+.practice-row:hover::before {
+  width: 100%;
+}
+
+.row-index {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--ink-quiet);
+  padding-top: 1.35rem;
+  letter-spacing: 0.04em;
+}
+
+.row-name h3 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 3.25rem;
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+}
+
+.row-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding-top: 0.75rem;
+}
+
+.row-copy {
+  font-family: 'Instrument Sans', Arial, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 42rem;
+}
+
+.row-deliverables {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+}
+
+.row-deliverables li {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.row-deliverables li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ruby);
+}
+
+/* ─────────────────────────────────────────────
+   § WORK (PROOF)
+   ───────────────────────────────────────────── */
+
+.work {
+  background: var(--paper-warm);
+}
+
+.work-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8rem;
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns: 180px minmax(260px, 1.05fr) minmax(0, 1.4fr) 220px;
+  gap: 3rem;
+  align-items: start;
+  padding: 4.25rem 0;
+  border-top: 1px solid var(--hairline-bold);
+  position: relative;
+}
+
+.work-row:last-child {
+  border-bottom: 1px solid var(--hairline-bold);
+}
+
+.work-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 1.25rem;
+}
+
+.work-year {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.55rem;
+  font-style: italic;
+  color: var(--ink-muted);
+}
+
+.work-sector {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-quiet);
+}
+
+.work-client {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 3rem;
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+}
+
+.work-copy {
+  font-family: 'Instrument Sans', Arial, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  padding-top: 0.85rem;
+  max-width: 34rem;
+}
+
+.work-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  padding-top: 0.5rem;
+  gap: 0.35rem;
+}
+
+.metric-value {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 5.75rem;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  color: var(--ruby);
+  font-weight: 400;
+}
+
+.metric-unit {
+  font-size: 3.5rem;
+  font-style: italic;
+  color: var(--ruby);
+}
+
+.metric-label {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  max-width: 11ch;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────
+   § PRINCIPLES (CREDIBILITY)
+   ───────────────────────────────────────────── */
+
+.principles {
+  background: var(--paper);
+  border-top: 1px solid var(--hairline);
+}
+
+.principles-head {
+  padding-bottom: 3rem;
+}
+
+.principles-list {
+  list-style: none;
+  margin: 0 0 8rem;
+  padding: 0;
+  max-width: 58rem;
+}
+
+.principle {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 2rem;
+  padding: 2.75rem 0;
+  border-top: 1px solid var(--hairline);
+  align-items: baseline;
+}
+
+.principle:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.principle-num {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.8rem;
+  font-style: italic;
+  color: var(--ruby);
+  line-height: 1;
+}
+
+.principle p {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 2rem;
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0;
+  font-weight: 400;
+}
+
+.principle p em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* ─────────────────────────────────────────────
+   § AUDIT (CONVERSION)
+   ───────────────────────────────────────────── */
+
+.audit {
+  background: var(--ruby);
+  color: var(--ruby-ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.audit-rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 245, 238, 0.22);
+}
+
+.audit-frame {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 9rem 3rem 9.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  position: relative;
+}
+
+.audit-label {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 245, 238, 0.62);
+}
+
+.audit-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 8rem;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  margin: 0.5rem 0 0.75rem;
+  max-width: 14ch;
+  color: var(--ruby-ink);
+}
+
+.audit-title-em {
+  font-style: italic;
+  color: rgba(255, 245, 238, 0.78);
+}
+
+.audit-lede {
+  font-family: 'Instrument Sans', Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: rgba(255, 245, 238, 0.82);
+  max-width: 38rem;
+  margin: 0 0 2.5rem;
+}
+
+.audit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 44rem;
+}
+
+.audit-field-label {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 245, 238, 0.58);
+}
+
+.audit-input-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 245, 238, 0.32);
+  transition: border-color 260ms ease;
+}
+
+.audit-input-group:focus-within {
+  border-bottom-color: rgba(255, 245, 238, 0.9);
+}
+
+.audit-input {
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.85rem;
+  line-height: 1;
+  padding: 0.9rem 0;
+  color: var(--ruby-ink);
+  letter-spacing: -0.01em;
+}
+
+.audit-input::placeholder {
+  color: rgba(255, 245, 238, 0.42);
+  font-style: italic;
+}
+
+.audit-submit {
+  background: transparent;
+  border: 0;
+  padding: 0.9rem 0 0.9rem 1.5rem;
+  cursor: pointer;
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ruby-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  white-space: nowrap;
+  transition: gap 260ms ease;
+}
+
+.audit-submit:hover {
+  gap: 1.4rem;
+}
+
+.audit-arrow {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.55rem;
+  line-height: 1;
+  transition: transform 260ms ease;
+}
+
+.audit-submit:hover .audit-arrow {
+  transform: translateX(4px);
+}
+
+.audit-fine {
+  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 245, 238, 0.55);
+  margin: 2rem 0 0;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────────────── */
+
 @media (max-width: 1100px) {
   .value-content {
     grid-template-columns: 1fr;
@@ -230,6 +742,53 @@ nav {
 
   .value-right {
     justify-content: flex-start;
+  }
+
+  .section-title {
+    font-size: 4.75rem;
+  }
+
+  .practice-row {
+    grid-template-columns: 60px 1fr;
+    gap: 1.75rem;
+  }
+
+  .row-name {
+    grid-column: 2;
+  }
+
+  .row-body {
+    grid-column: 2;
+  }
+
+  .row-name h3 {
+    font-size: 2.4rem;
+  }
+
+  .work-row {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .work-metric {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .metric-value {
+    font-size: 4.5rem;
+  }
+
+  .metric-unit {
+    font-size: 2.75rem;
+  }
+
+  .audit-title {
+    font-size: 5.5rem;
+  }
+
+  .principle p {
+    font-size: 1.5rem;
   }
 }
 
@@ -251,7 +810,7 @@ nav {
   }
 
   .value-left h2 {
-    font-size: 4.5rem;
+    font-size: 4rem;
     margin-left: 0;
   }
 
@@ -262,7 +821,12 @@ nav {
 
   .glass-pills {
     margin-left: 0;
-    grid-template-columns: 1fr;
-    max-width: 100%;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .glass-pill {
+    width: 180px;
+    height: 48px;
   }
 }
