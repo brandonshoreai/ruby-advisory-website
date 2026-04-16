@@ -124,7 +124,7 @@ nav {
 
 #value-prop {
   background: #fff;
-  padding: 4.75rem 3rem 5rem;
+  padding: 4.75rem 3rem 2rem;
 }
 
 .value-content {
@@ -144,10 +144,10 @@ nav {
 
 .value-left h2 {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 5.5rem;
+  font-size: 7rem;
   line-height: 0.95;
-  letter-spacing: -0.035em;
-  margin: 0 0 1.1rem 0;
+  letter-spacing: -0.04em;
+  margin: 0 0 1.5rem 0;
   color: #000;
   font-weight: 400;
   max-width: none;
@@ -158,13 +158,13 @@ nav {
 }
 
 .value-subtext {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1.4;
   color: #6a6a6a;
   margin: 0 0 2rem 0;
   font-weight: 400;
   font-family: 'Instrument Sans', Arial, sans-serif;
-  max-width: 32rem;
+  max-width: 36rem;
 }
 
 /* Floating Henry button — fixed bottom-right, stays on scroll.
@@ -301,7 +301,7 @@ nav {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
-  padding: 8rem 0 4.5rem;
+  padding: 4rem 0 4.5rem;
 }
 
 .section-label {
@@ -344,7 +344,6 @@ nav {
 
 .practice {
   background: var(--paper);
-  border-top: 1px solid var(--hairline);
 }
 
 .practice-list {
@@ -586,7 +585,7 @@ nav {
 
 .principle p {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 2rem;
+  font-size: 1.875rem;
   line-height: 1.28;
   letter-spacing: -0.015em;
   color: var(--ink);
