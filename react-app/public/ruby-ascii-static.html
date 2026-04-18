@@ -7,6 +7,7 @@
   * { margin: 0; padding: 0; }
   body {
     background: #fff;
+    transition: background 200ms ease-out;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +29,9 @@
 import * as THREE from 'three';
 import { AsciiEffect } from 'three/addons/effects/AsciiEffect.js';
 
+let bgColor = '#ffffff';
+let fgColor = '#b01030';
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
 
@@ -40,9 +44,22 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 const effect = new AsciiEffect(renderer, ' .:-=+*#%@', { invert: true, resolution: 0.2 });
 effect.setSize(window.innerWidth, window.innerHeight);
-effect.domElement.style.color = '#b01030';
-effect.domElement.style.backgroundColor = '#fff';
+effect.domElement.style.color = fgColor;
+effect.domElement.style.backgroundColor = bgColor;
 document.body.appendChild(effect.domElement);
+
+function applyTheme(dark) {
+  bgColor = dark ? '#0a0a0a' : '#ffffff';
+  fgColor = dark ? '#e34664' : '#b01030';
+  document.body.style.background = bgColor;
+  effect.domElement.style.color = fgColor;
+  effect.domElement.style.backgroundColor = bgColor;
+}
+
+window.addEventListener('message', (e) => {
+  const d = e.data || {};
+  if (d.type === 'ruby-ascii-theme') applyTheme(!!d.dark);
+});
 
 function createGemstone() {
   const geo = new THREE.BufferGeometry();
@@ -144,7 +161,7 @@ function animate() {
   // Hide background @ characters by making them white
   const tds = effect.domElement.querySelectorAll('td');
   for (let i = 0; i < tds.length; i++) {
-    tds[i].innerHTML = tds[i].innerHTML.replace(/@/g, '<span style="color:#fff">@</span>');
+    tds[i].innerHTML = tds[i].innerHTML.replace(/@/g, '<span style="color:' + bgColor + '">@</span>');
   }
 }
 
