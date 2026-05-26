@@ -35,20 +35,21 @@ const pages = [
 const rubyHeader = String.raw`
 <header class="ruby-runtime-header" aria-label="Ruby Advisory primary navigation">
   <a class="ruby-runtime-brand" href="/#ruby-ascii-opener">
-    <span class="ruby-runtime-mark">R</span>
-    <span>Ruby Advisory</span>
+    RUBY ADVISORY
   </a>
-  <nav class="ruby-runtime-links" aria-label="Primary">
-    <a href="/#features">About</a>
-    <a href="/#agents">Services</a>
-    <a href="/#case-studies">Work</a>
-    <a href="/careers/">Careers</a>
-    <a href="/#book">Contact</a>
-  </nav>
-  <button class="ruby-runtime-menu" type="button" aria-label="Menu">
-    <span></span>
-    <span></span>
-  </button>
+  <div class="ruby-runtime-actions">
+    <nav class="ruby-runtime-links" aria-label="Primary">
+      <a href="/#features">About</a>
+      <a href="/#case-studies">Work</a>
+      <a href="/#features">Process</a>
+      <a href="/#book">Request a free audit</a>
+    </nav>
+    <button class="ruby-runtime-theme" type="button" aria-label="Theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 4.75v2.1M12 17.15v2.1M6.85 6.85l1.48 1.48M15.67 15.67l1.48 1.48M4.75 12h2.1M17.15 12h2.1M6.85 17.15l1.48-1.48M15.67 8.33l1.48-1.48M12 9.35a2.65 2.65 0 1 1 0 5.3 2.65 2.65 0 0 1 0-5.3Z" />
+      </svg>
+    </button>
+  </div>
 </header>`
 
 const rubyOpener = String.raw`
@@ -74,6 +75,8 @@ const routeGuardScript = String.raw`
 
 const runtimeCss = String.raw`
 <style id="ruby-runtime-mirror-css">
+  @import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap");
+
   html {
     scroll-behavior: smooth;
   }
@@ -111,65 +114,103 @@ const runtimeCss = String.raw`
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 2147483000;
-    height: 72px;
-    padding: 0 clamp(24px, 8.333vw, 120px);
+    height: 132px;
+    padding: 0 38px 0 28px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    background: rgba(248, 248, 248, 0.96);
-    color: #202020;
-    font-family: "Switzer", "Inter", system-ui, sans-serif;
+    background: #ffffff;
+    border: 0;
+    box-shadow: none;
+    color: #0a0a0a;
+    font-family: "Geist Mono", "SF Mono", "Courier New", monospace;
+    font-size: 18px;
+    line-height: 1.45;
+    letter-spacing: 0.18px;
     -webkit-font-smoothing: antialiased;
-    backdrop-filter: blur(12px);
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateY(-100px);
+    opacity: 0;
+    animation: rubyRuntimeHeaderFall 1s ease-out 2s forwards;
+    will-change: transform, opacity;
+  }
+
+  @keyframes rubyRuntimeHeaderFall {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .ruby-runtime-brand {
     display: inline-flex;
     align-items: center;
-    gap: 11px;
-    color: #202020;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.05em;
+    margin-top: 43px;
+    color: #0a0a0a;
+    font-size: 16.2px;
+    font-weight: 400;
+    line-height: 26.1px;
+    letter-spacing: 0.648px;
     text-decoration: none;
+    text-transform: uppercase;
   }
 
-  .ruby-runtime-mark {
-    width: 22px;
-    height: 22px;
-    display: inline-grid;
-    place-items: center;
-    border-radius: 2.12px;
-    background: linear-gradient(134deg, #e64059 2.88%, #b01030 33.65%, #5c0815 59.13%, #1b0207 87.02%);
-    color: #ffffff;
-    font-family: "Source Serif Pro", Georgia, serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0;
+  .ruby-runtime-actions {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 42px;
   }
 
   .ruby-runtime-links {
     display: flex;
     align-items: center;
-    gap: clamp(26px, 2.4vw, 43px);
-    font-family: "Chivo Mono", monospace;
-    font-size: 12px;
+    gap: 2rem;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26.1px;
+    letter-spacing: 0.18px;
     text-transform: uppercase;
   }
 
   .ruby-runtime-links a {
-    color: rgba(32, 32, 32, 0.7);
+    color: #0a0a0a;
+    font-size: 16.2px;
+    line-height: 26.1px;
+    letter-spacing: 0.648px;
+    font-weight: 400;
     text-decoration: none;
-    transition: color 180ms ease;
+    transition: color 160ms ease;
   }
 
   .ruby-runtime-links a:hover {
     color: #b01030;
   }
 
-  .ruby-runtime-menu {
-    display: none;
+  .ruby-runtime-theme {
+    width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border: 1px solid #eaeaea;
+    border-radius: 999px;
+    padding: 0;
+    background: #ffffff;
+    color: #5c5c5c;
+    opacity: 0.7;
+  }
+
+  .ruby-runtime-theme svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   body > #main [data-framer-name="Desktop"],
@@ -179,44 +220,52 @@ const runtimeCss = String.raw`
     pointer-events: none !important;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .ruby-runtime-header {
+      transform: translateY(0);
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .ruby-runtime-header {
+      font-size: 16px;
+    }
+
+    .ruby-runtime-brand,
+    .ruby-runtime-links a {
+      font-size: 12.48px;
+      line-height: 23.2px;
+      letter-spacing: 0.4992px;
+    }
+
+    .ruby-runtime-links {
+      gap: 1.1rem;
+    }
+  }
+
   @media (max-width: 809.98px) {
     .ruby-runtime-header {
-      height: 56px;
-      padding: 0 16px;
-      justify-content: center;
+      height: 88px;
+      padding: 0 18px;
     }
 
     .ruby-runtime-brand {
-      font-size: 20px;
+      margin-top: 31px;
     }
 
-    .ruby-runtime-mark {
-      position: absolute;
-      left: 16px;
+    .ruby-runtime-actions {
+      margin-top: 25px;
     }
 
     .ruby-runtime-links {
       display: none;
     }
 
-    .ruby-runtime-menu {
-      position: absolute;
-      right: 16px;
+    .ruby-runtime-theme {
       width: 24px;
-      height: 20px;
-      display: grid;
-      gap: 7px;
-      place-content: center;
-      border: 0;
-      padding: 0;
-      background: transparent;
-    }
-
-    .ruby-runtime-menu span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: #a5a5a5;
+      height: 24px;
     }
   }
 </style>`
