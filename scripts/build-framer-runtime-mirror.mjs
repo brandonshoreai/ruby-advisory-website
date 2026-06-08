@@ -222,22 +222,22 @@ const runtimeCss = String.raw`
 
   .ruby-particle-card {
     isolation: isolate;
-    background: #c3183f !important;
+    background: #bd7b7f !important;
   }
 
   .ruby-particle-card > .ruby-particle-hidden-source {
     position: absolute !important;
     inset: 0 !important;
     z-index: 0 !important;
-    opacity: 0.72 !important;
+    opacity: 0.68 !important;
     visibility: visible !important;
     pointer-events: none !important;
-    filter: grayscale(1) contrast(1.18) brightness(0.7) sepia(1) saturate(1.9) hue-rotate(300deg) !important;
+    filter: grayscale(1) contrast(0.88) brightness(0.88) sepia(0.3) saturate(0.98) hue-rotate(310deg) !important;
     mix-blend-mode: luminosity;
   }
 
   .ruby-particle-card > .ruby-particle-hidden-source img {
-    filter: grayscale(1) contrast(1.08) brightness(0.9) !important;
+    filter: grayscale(1) contrast(0.96) brightness(0.94) !important;
   }
 
   .ruby-particle-card > .ruby-particle-muted-overlay {
@@ -251,7 +251,7 @@ const runtimeCss = String.raw`
     z-index: 1;
     overflow: hidden;
     pointer-events: none;
-    background: rgba(195, 24, 63, 0.74);
+    background: rgba(174, 82, 91, 0.36);
   }
 
   .ruby-particle-field::before {
@@ -260,7 +260,7 @@ const runtimeCss = String.raw`
     inset: 0;
     z-index: 1;
     display: block;
-    background: rgba(195, 24, 63, 0.32);
+    background: rgba(126, 54, 62, 0.1);
   }
 
   .ruby-particle-field::after {
@@ -279,6 +279,68 @@ const runtimeCss = String.raw`
   .ruby-particle-card > :not(.ruby-particle-field):not(.ruby-particle-hidden-source):not(.ruby-particle-muted-overlay) {
     position: relative;
     z-index: 2;
+  }
+
+  .ruby-optimization-card {
+    position: relative;
+    background: #bd7b7f !important;
+  }
+
+  .ruby-optimization-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: rgba(174, 82, 91, 0.22);
+  }
+
+  .ruby-optimization-copy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .ruby-optimization-copy [data-framer-component-type="RichTextContainer"],
+  .ruby-optimization-copy .framer-text {
+    color: #f8f8f8 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+  }
+
+  .ruby-optimization-copy [data-framer-name="Heading"] .framer-text,
+  .ruby-optimization-copy [data-framer-name="Heading"] h1,
+  .ruby-optimization-copy [data-framer-name="Heading"] h2,
+  .ruby-optimization-copy [data-framer-name="Heading"] h3 {
+    font-weight: 500 !important;
+  }
+
+  .ruby-optimization-copy [data-framer-name="pill-container"],
+  .ruby-optimization-copy [data-framer-name="pill-container"] *,
+  .ruby-optimization-copy [data-framer-name="pill-container"] .framer-text {
+    color: #ffffff !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 12px !important;
+    letter-spacing: 0 !important;
+    text-shadow: none !important;
+  }
+
+  .ruby-optimization-copy [data-framer-name="Text"] .framer-text,
+  .ruby-optimization-copy [data-framer-name="Text"] p {
+    font-weight: 400 !important;
+  }
+
+  .ruby-optimization-copy [data-framer-name="Heading"] .framer-text,
+  .ruby-optimization-copy [data-framer-name="Heading"] h1,
+  .ruby-optimization-copy [data-framer-name="Heading"] h2,
+  .ruby-optimization-copy [data-framer-name="Heading"] h3 {
+    font-weight: 500 !important;
+  }
+
+  .ruby-optimization-copy a [data-framer-component-type="RichTextContainer"],
+  .ruby-optimization-copy a .framer-text {
+    color: #b01030 !important;
+    text-shadow: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -644,11 +706,22 @@ const runtimeScript = String.raw`
       });
     };
 
+    const patchOptimizationCard = () => {
+      const heading = findParticleHeading("Agent System Optimization");
+      const card = heading && heading.closest('[data-framer-name="Feature Card 4"]');
+      if (card) {
+        card.classList.add("ruby-optimization-card");
+        const copy = card.querySelector('[data-framer-name="Container"]');
+        if (copy) copy.classList.add("ruby-optimization-copy");
+      }
+    };
+
     const run = () => {
       setRubyTitle();
       replaceText();
       patchLinks();
       patchParticleCards();
+      patchOptimizationCard();
     };
 
     const observer = new MutationObserver((mutations) => {
@@ -661,6 +734,7 @@ const runtimeScript = String.raw`
       }
       patchLinks();
       patchParticleCards();
+      patchOptimizationCard();
     });
 
     if (document.readyState === "loading") {
