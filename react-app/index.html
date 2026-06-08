@@ -318,6 +318,13 @@
       justify-content: center !important;
       gap: 14px !important;
       overflow: hidden !important;
+      font-size: 16px !important;
+      line-height: 1 !important;
+      transition:
+        transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+      will-change: transform;
     }
 
     #hero-section .framer-zvi4v0 a,
@@ -326,12 +333,25 @@
       --framer-text-color: #ffffff !important;
       --framer-link-text-color: #ffffff !important;
       --extracted-r6o4lv: #ffffff !important;
+      font-size: 16px !important;
+      line-height: 1 !important;
     }
 
     #hero-section .framer-zvi4v0 a > div:not([data-framer-name="Hover Overlay"]) {
       position: relative !important;
       top: auto !important;
       left: auto !important;
+      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+      will-change: transform;
+    }
+
+    #hero-section .framer-zvi4v0 a:hover {
+      transform: translate3d(3px, -1px, 0) !important;
+      box-shadow: 0 14px 30px rgba(12, 18, 36, 0.16) !important;
+    }
+
+    #hero-section .framer-zvi4v0 a:hover > div:not([data-framer-name="Hover Overlay"]) {
+      transform: translateX(2px) !important;
     }
 
     #hero-section .framer-zvi4v0 .framer-16ye8wm,
@@ -340,6 +360,8 @@
       height: auto !important;
       text-align: center !important;
       white-space: nowrap !important;
+      font-size: 16px !important;
+      line-height: 1 !important;
     }
 
     #hero-section .framer-zvi4v0 .framer-9X8zn {
@@ -382,6 +404,12 @@
       border-radius: 999px !important;
       align-items: center !important;
       justify-content: center !important;
+      font-size: 16px !important;
+      line-height: 1 !important;
+      transition:
+        transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
     }
 
     #hero-section .framer-zvi4v0 a,
@@ -390,6 +418,21 @@
       --framer-text-color: #ffffff !important;
       --framer-link-text-color: #ffffff !important;
       --extracted-r6o4lv: #ffffff !important;
+      font-size: 16px !important;
+      line-height: 1 !important;
+    }
+
+    #hero-section .framer-zvi4v0 a:hover {
+      transform: translate3d(3px, -1px, 0) !important;
+      box-shadow: 0 12px 24px rgba(12, 18, 36, 0.14) !important;
+    }
+
+    #hero-section .framer-zvi4v0 a > div:not([data-framer-name="Hover Overlay"]) {
+      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+
+    #hero-section .framer-zvi4v0 a:hover > div:not([data-framer-name="Hover Overlay"]) {
+      transform: translateX(2px) !important;
     }
 
     #hero-section .framer-zvi4v0 [data-framer-name="Hover Overlay"] {
